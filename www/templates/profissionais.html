@@ -1,0 +1,31 @@
+
+     <header class="bar bar-header bar-assertive">
+     
+     <button side="left" menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  <div class="h1 title">Meus Profissionais</div>
+     
+    </header>
+
+
+
+    <ion-content class="has-header">
+    
+      <ion-list>
+      
+      
+        <ion-item class="item-avatar item-icon-right" ng-repeat="registro in registros" href="#/app/profissionais/{{registro.id}}" >
+          <img src="{{registro.foto}}">
+          <h2>{{registro.nome}}</h2>
+          <p>{{registro.Profissao}}  - {{registro.cidade}} </p>
+         <i class="icon ion-ios7-arrow-right"></i>
+      </ion-item>
+      
+      
+ 
+
+      </ion-list>
+
+       
+    </ion-content>
+
+ 
