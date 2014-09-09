@@ -1,4 +1,4 @@
-angular.module('selfboss', ['ionic', 'selfboss.controllers'])
+angular.module('selfboss', ['ionic', 'selfboss.controllers', 'selfboss.directives'])
 
  .run(function($ionicPlatform) {
   
@@ -79,6 +79,17 @@ angular.module('selfboss', ['ionic', 'selfboss.controllers'])
         'menuContent' :{
           templateUrl: "templates/mensagens.html",
           controller: 'mensagensCtrl'
+        }
+      }
+    })	
+	
+	
+	 .state('app.pertodemim', {
+      url: "/pertodemim",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/pertodemim.html",
+          controller: 'MapCtrl'
         }
       }
     })	
