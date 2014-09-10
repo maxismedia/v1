@@ -165,9 +165,9 @@ angular.module('selfboss.controllers', [])
           zoom: 14,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-  		
-       // var map = new google.maps.Map($element[0], mapOptions);
-  		$scope.map.setCenter($scope.myLatlng);
+  		  
+        //var map = new google.maps.Map($element[0], mapOptions);
+        $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
 		$scope.marker = new google.maps.Marker(
 		
 		
@@ -175,18 +175,7 @@ angular.module('selfboss.controllers', [])
           position: $scope.myLatlng,
           map: $scope.map,
           title: 'Hello World!'
-         },
-		 {
-          position: $scope.myLatlng,
-          map: $scope.map,
-          title: 'Hello World!'
-         },
-		 {
-          position: $scope.myLatlng,
-          map: $scope.map,
-          title: 'Hello World!'
-         }
-		 
+         } 
 		 
 		 
 		 

@@ -6,3 +6,7 @@ map {
 .scroll {
   height: 100%;
 }
+
+.info {
+width: 100px;
+} 
