@@ -7,13 +7,38 @@ angular.module('selfboss.directives', [])
       onCreate: '&'
     },
     link: function ($scope, $element, $attr) {
-      function initialize() {
-        var mapOptions = {
-          center: new google.maps.LatLng(43.07493, -89.381388),
-          zoom: 16,
+      
+	  
+	  
+	  
+	  
+	  
+	  function initialize() {
+        
+		  var myLatlng = new google.maps.LatLng(43.07493, -89.381388);
+
+		
+		
+		var mapOptions = {
+          center: myLatlng,
+          zoom: 14,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
+		
+		
+		
         var map = new google.maps.Map($element[0], mapOptions);
+		
+		
+		
+		var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title: 'Hello World!'
+         });
+
+
+		
   
         $scope.onCreate({map: map});
 
@@ -23,12 +48,34 @@ angular.module('selfboss.directives', [])
           return false;
         });
       }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 
       if (document.readyState === "complete") {
         initialize();
       } else {
         google.maps.event.addDomListener(window, 'load', initialize);
       }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
     }
   }
 });

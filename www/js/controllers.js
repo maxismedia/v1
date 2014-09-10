@@ -136,23 +136,94 @@ angular.module('selfboss.controllers', [])
     $scope.map = map;
   };
 
+
+
+
+
   $scope.centerOnMe = function () {
-    console.log("Centering");
+	 
+	 console.log("Centering");
     if (!$scope.map) {
       return;
     }
-
-    $scope.loading = $ionicLoading.show({
-      content: 'Carregando sua localização ...',
+	
+	
+	 $scope.loading = $ionicLoading.show({
+      content: 'Carregando sua localizacao ...',
       showBackdrop: false
     });
+	
+	
+	
+	 navigator.geolocation.getCurrentPosition(function (pos) {
+      console.log('Got pos', pos);
+	  
+	   $scope.myLatlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+ 		 
+		$scope.mapOptions = {
+          center: $scope.myLatlng,
+          zoom: 14,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+  		
+       // var map = new google.maps.Map($element[0], mapOptions);
+  		$scope.map.setCenter($scope.myLatlng);
+		$scope.marker = new google.maps.Marker(
+		
+		
+		{
+          position: $scope.myLatlng,
+          map: $scope.map,
+          title: 'Hello World!'
+         },
+		 {
+          position: $scope.myLatlng,
+          map: $scope.map,
+          title: 'Hello World!'
+         },
+		 {
+          position: $scope.myLatlng,
+          map: $scope.map,
+          title: 'Hello World!'
+         }
+		 
+		 
+		 
+		 
+		 
+		 );
+	   
+	   
+      $scope.loading.hide();
+	  
+	  
+	  
+	  
+	   }, function (error) {
+       alert('Nao foi possível encontrar localizacao: ' + error.message);
+    });
+	  
+	  
+	  /*
+     
+ 
 
     navigator.geolocation.getCurrentPosition(function (pos) {
       console.log('Got pos', pos);
       $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
       $scope.loading.hide();
     }, function (error) {
-       alert('Não foi possível encontrar localização: ' + error.message);
+       alert('Nao foi possível encontrar localizacao: ' + error.message);
     });
-  };
+  */};
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 });
