@@ -52,6 +52,41 @@ angular.module('selfboss', ['ionic', 'selfboss.controllers', 'selfboss.directive
     })
 	
 	
+.state('app.servicos', {
+      url: "/servicos",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/servicos.html",
+          controller: 'servicosCtrl'
+        }
+      }
+    })		
+	
+	
+.state('app.buscar', {
+      url: "/buscar",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/buscar.html",
+          controller: 'buscarCtrl'
+        }
+      }
+    })	
+	
+	
+.state('app.suporte', {
+      url: "/suporte",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/suporte.html",
+          controller: 'suporteCtrl'
+        }
+      }
+    })			
+	
+	
+	
+	
  .state('app.orcamentos', {
       url: "/orcamentos",
       views: {

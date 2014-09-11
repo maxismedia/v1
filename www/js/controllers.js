@@ -130,6 +130,17 @@ angular.module('selfboss.controllers', [])
 })
 
 
+.controller('servicosCtrl', function($scope, $stateParams) {
+})
+
+.controller('buscarCtrl', function($scope, $stateParams) {
+})
+
+
+.controller('suporteCtrl', function($scope, $stateParams) {
+})
+
+
 .controller('MapCtrl', function($scope, $ionicLoading) {
  
   $scope.mapCreated = function(map) {
