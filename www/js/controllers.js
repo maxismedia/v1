@@ -1,7 +1,7 @@
 angular.module('selfboss.controllers', [])
 
-
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicSlideBoxDelegate) {
+//function siteController($scope,$http,$routeParams,$location)
+.controller('AppCtrl', function($scope, $ionicModal,$http, $timeout, $location, $ionicSlideBoxDelegate) {
    
    $scope.logado    = false; 
    $scope.naologado = true; 
@@ -16,7 +16,9 @@ angular.module('selfboss.controllers', [])
    
    
   $scope.login = function() {
-  	 $scope.form_nome     = 'Login'; 
+	   
+  	 $scope.enviando_login    = false;  
+	 $scope.form_nome     = 'Login'; 
 	 $scope.form_login    = true;  
 	 $scope.form_esqueci  = false;  
 	 $scope.form_cadastro = false;  
@@ -69,6 +71,8 @@ angular.module('selfboss.controllers', [])
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
+	  
+	  /*
     console.log('Doing login', $scope.loginData);
 	
 	$scope.logado    = true; 
@@ -80,6 +84,67 @@ angular.module('selfboss.controllers', [])
     $timeout(function() {
       $scope.closeLogin();
     }, 1000);
+  */
+  
+   
+	
+	$scope.enviando_login  = true;
+	
+ 	var dados = $.param({ 
+	            usuario:  $("input:text[name='usuario']").val(),
+				senha:    $("input:password[name='senha']").val(),			 
+   			});	
+			   
+			   
+ 			   
+ 	 $http({
+        method  : 'POST',  
+        url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/login',  
+        data    : dados,  
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
+    })
+        .success(function(data) {
+			
+             if (!data.sucesso) {
+				 
+				    $scope.enviando_login        = false;
+					$scope.errorUsuario          = data.errors.usuario;
+					$scope.errorSenha            = data.errors.senha;
+    				$scope.retorno_error_login   = data.retorno_error_login; 
+ 					
+ 			 } else {  
+			 
+			 
+			 $scope.logado    = true; 
+	$scope.naologado = false; 
+	
+
+    // Simulate a login delay. Remove this and replace with your login
+    // code if using a login system
+    $timeout(function() {
+      $scope.closeLogin();
+    }, 1000);
+ 				  
+				   
+					 
+ 				 }
+        }); 
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
+  
   };
 })
 

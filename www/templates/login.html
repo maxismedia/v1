@@ -9,16 +9,34 @@
     <div ng-show="form_login">
       <form ng-submit="doLogin()">
         <div class="list">
-          <label class="item item-input"> <span class="input-label">Usuário</span>
-            <input type="text" ng-model="loginData.username">
+         
+              <p ng-bind-html="retorno_error_login" style="margin-left:20px"></p>
+
+         
+          <label class="item item-input">    
+            <span class="input-label">Usuário</span>
+            <input type="text" id="usuario" name="usuario">
+            
+
           </label>
-          <label class="item item-input"> <span class="input-label">Senha</span>
-            <input type="password" ng-model="loginData.password">
+          
+          
+           <p ng-bind-html="errorUsuario" style="margin-left:20px"></p>
+           <label class="item item-input"> 
+          <span class="input-label">Senha</span>
+            <input type="password" id="senha" name="senha">
+ 
           </label>
+         <p ng-bind-html="errorSenha" style="margin-left:20px"></p>
        
-       
-       <div class="padding">
-        <button class="button button-block button-positive">Entrar</button>
+       <div class="padding" ng-hide="enviando_login">
+        <button type="submit" class="button button-block button-positive">Entrar</button>
+      </div>
+      
+      
+      
+       <div class="padding" ng-show="enviando_login">
+       <img src="img/loading.gif">
       </div>
        
        
@@ -39,8 +57,14 @@
             <input type="text" ng-model="loginData.username">
           </label>
           
-            <div class="padding">
+            
+       <div class="padding" ng-hide="enviando_login">
         <button class="button button-block button-positive">Entrar</button>
+      </div>
+      
+      
+       <div class="padding" ng-show="enviando_login">
+       <img src="img/loading.gif">
       </div>
           
           
