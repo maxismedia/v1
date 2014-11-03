@@ -1,6 +1,84 @@
 angular.module('selfboss.controllers', [])
  
  .controller('LoginCtrl', function($scope, $ionicModal, $cookies, $http, $timeout, $location,$state, auth) {
+
+
+
+  
+$scope.cadastroSalvar = function() {
+	
+	$scope.enviando              = true;
+	var dados = $('#formcadastro').serialize();
+ 			
+	$http({
+        method  : 'POST',
+ 	    url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/cadastro/salvar',  
+         data    : dados,  
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
+    })
+        .success(function(data) {
+			
+             if (!data.sucesso) {
+				    $scope.enviando                  = false;
+ 					$scope.errorNome                 = data.errors.nome;
+ 					$scope.errorCelular              = data.errors.celular;
+ 					$scope.errorEmail                = data.errors.email;
+					$scope.errorEmail1               = data.errors.email1;
+ 					$scope.errorUsuario              = data.errors.usuario;
+					$scope.errorSenha                = data.errors.senha;
+    			    $scope.retorno_error             = data.retorno_error; 
+					 
+                   
+			 } else {
+				    $scope.enviando                  = false;
+				 
+					$scope.errorNome                 = '';
+ 					$scope.errorCelular              = '';
+ 					$scope.errorEmail                = '';
+					$scope.errorEmail1               = '';
+ 					$scope.errorUsuario              = '';
+					$scope.errorSenha                = '';
+					
+ 					$scope.retorno          = data.retorno;
+					$scope.retorno_error    = data.retorno_error;
+					$scope.retorno_mensagem = data.retorno_mensagem;
+					
+ 					 
+ 				 }
+        }); 
+}	 
+	 
+ $scope.esqueci_senha = function() {
+	
+	$scope.enviando_gerar  = true;
+ 	
+	var dados = $('#form1').serialize();	
+  
+ 	$http({
+        method  : 'POST',
+	     url     : 'http://ec2-54-94-136-137.sa-east-1.compute.amazonaws.com/home/recupera',  
+         data    : dados,  
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  
+    })
+  	
+        .success(function(data) {
+              if (!data.sucesso) {
+			        $scope.enviando_gerar   = false;
+ 				    $scope.retorno_esqueci_senha          = data.retorno_esqueci_senha;
+					$scope.errorUsuario2                   = data.errors.usuario;
+					$scope.retorno_esqueci_senha_error    = data.retorno_esqueci_senha_error;
+ 					 
+ 			 } else {
+				    $scope.enviando_gerar   = false;
+ 				    $scope.retorno_esqueci_senha          = data.retorno_esqueci_senha;
+					$scope.retorno_esqueci_senha_error    = '';
+					$scope.errorUsuario2     = '';
+  					 
+  				 }
+        }); 
+}	 
+	 
+	 
   
    
   $scope.login = function() {
@@ -18,6 +96,8 @@ angular.module('selfboss.controllers', [])
 	 $scope.form_login    = false;  
 	 $scope.form_esqueci  = true;  
 	 $scope.form_cadastro = false;  
+	 $scope.enviando_gerar = false;
+	 
   };
 	
   $scope.cadastro = function() {
