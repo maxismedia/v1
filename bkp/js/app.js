@@ -1,12 +1,10 @@
 angular.module('selfboss', ['ionic', 'ngCookies', 'selfboss.controllers', 'selfboss.directives'])
+
  
- .run(function($ionicPlatform,$rootScope, auth) {
+
+
+ .run(function($ionicPlatform) {
 	 
-    // $rootScope.$on('$routeChangeStart', function()
-    //{
-         auth.checkStatus();
-   // })
- 	 
   $ionicPlatform.ready(function() {
     
 	if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -24,50 +22,19 @@ angular.module('selfboss', ['ionic', 'ngCookies', 'selfboss.controllers', 'selfb
   
 })
 
-
-
-.factory("auth", function( $cookies,$cookieStore,$location,$state)
-{
-    return{
-		 
-         checkStatus : function()
-        {     
-		     var rutasPrivadas = [
-    			"/app/home",
-				"/app/profissionais" 
-  			 ];
- 		   
-		    if(this.in_array($location.path(),rutasPrivadas) && typeof($cookies.session_usuario) == "undefined")
-            {
- 			   $state.go('login');  
-            }
-            
-             if($location.path() == "/login" && typeof($cookies.session_usuario) != "undefined")
-            {
-  			     $state.go('app.home');
-            } 
-        },
-        in_array : function(needle, haystack)
-        {
-            var key = '';
-            for(key in haystack)
-            {
-                if(haystack[key] == needle)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
-})
-
  
  
  
 .config(function($stateProvider, $urlRouterProvider) {
-     $stateProvider
-   
+  $stateProvider
+  
+  
+  .state('login', {
+	url: '/',
+	templateUrl: 'templates/login.html', // this is my login form
+	controller: 'loginCtrl'
+     })
+  
    
     .state('app', {
       url: "/app",
@@ -206,19 +173,9 @@ angular.module('selfboss', ['ionic', 'ngCookies', 'selfboss.controllers', 'selfb
           controller: 'profissionalCtrl'
         }
       }
-    }) 
-  
-   
-  	.state('login', {
-      url: "/login",
-      templateUrl: "templates/login.html",
-      controller: 'LoginCtrl'
     });
-
-
-
-  $urlRouterProvider.otherwise('/login');
-   
+  
+  $urlRouterProvider.otherwise('/app/home');
 })  
 
 
