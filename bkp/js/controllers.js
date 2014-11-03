@@ -1,7 +1,30 @@
 angular.module('selfboss.controllers', [])
+
+
+
+.controller('AppCtrl', function($scope, $ionicModal, $cookies, $http, $timeout, $location, $ionicSlideBoxDelegate) {
  
- .controller('LoginCtrl', function($scope, $ionicModal, $cookies, $http, $timeout, $location,$state, auth) {
-  
+    $scope.naologado = true;
+    $scope.logado    = false;
+    $scope.menu_lateral = function(){
+  	
+		if($cookies.usuario){
+ 			$scope.session_usuario = $cookies.session_usuario; 
+			$scope.session_cliente = $cookies.session_cliente; 
+ 			}else{
+ 			$scope.session_usuario = ''; 
+ 		 }  
+		
+		}
+	 
+   $scope.nextSlide = function() {
+    $ionicSlideBoxDelegate.next();
+  }
+   
+    $scope.previousSlide = function() {
+    $ionicSlideBoxDelegate.previous();
+  }
+   
    
   $scope.login = function() {
 	   
@@ -28,10 +51,21 @@ angular.module('selfboss.controllers', [])
      $scope.modal.show();
   };	
 	
-	  
+	
+	
+	
+	  $scope.sair = function() {
+  	 alert('saiu');
+     };
+	
+	
+	
+ 	
+  // Form data for the login modal
+  $scope.loginData = {};
 
   // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/modals/login.html', {
+  $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;
@@ -48,7 +82,22 @@ angular.module('selfboss.controllers', [])
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
- 
+	  
+	  /*
+    console.log('Doing login', $scope.loginData);
+	
+	$scope.logado    = true; 
+	$scope.naologado = false; 
+	
+
+    // Simulate a login delay. Remove this and replace with your login
+    // code if using a login system
+    $timeout(function() {
+      $scope.closeLogin();
+    }, 1000);
+  */
+  
+   
 	
 	$scope.enviando_login  = true;
 	
@@ -85,55 +134,32 @@ angular.module('selfboss.controllers', [])
 					$cookies.session_plano = data.session_plano;
  					$cookies.session_produto_usuario = data.session_produto_usuario;
 					$cookies.session_produto_captador = data.session_produto_captador;
-					$cookies.session_produto_profissional = data.session_produto_profissional; 
-					 
+					$cookies.session_produto_profissional = data.session_produto_profissional;
+       
+ 	   				//console.log($cookies); 
  	   
 					$timeout(function() {
 					  $scope.closeLogin();
-					  $state.go('app.home');
 					}, 500);
   				 }
         }); 
+ 
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
   
   };
-})
-
-.controller('AppCtrl', function($scope, $state, $ionicModal, $cookieStore, $cookies, $http, $timeout, $location, $ionicSlideBoxDelegate, auth) {
-  
-   auth.checkStatus();
-   
-   //dados
-   $scope.session_cd_cliente = $cookies.session_cd_cliente;
-   $scope.session_usuario = $cookies.session_usuario;
-   $scope.session_nome = $cookies.session_nome;
-   
-   
-   $scope.nextSlide = function() {
-    $ionicSlideBoxDelegate.next();
-  }
-   
-    $scope.previousSlide = function() {
-    $ionicSlideBoxDelegate.previous();
-  }
-    
-    $scope.logout = function() {
-  		$cookieStore.remove("logado");
-		$cookieStore.remove("session_cd_cliente");
-		$cookieStore.remove("session_nome");
-		$cookieStore.remove("session_usuario");
-		$cookieStore.remove("session_status");
-		$cookieStore.remove("session_email");
-		$cookieStore.remove("session_emp_secreto");
-		$cookieStore.remove("session_plano");
-		$cookieStore.remove("session_produto_usuario");
-		$cookieStore.remove("session_produto_captador");
-		$cookieStore.remove("session_produto_profissional");
-		$state.go('login');
-   };
-   
-   
-    
 })
 
 .controller('homeCtrl', function($scope) {

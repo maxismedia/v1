@@ -1,0 +1,78 @@
+<div class="modal">
+  <ion-header-bar>
+    <h1 class="title">{{form_nome}}</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLogin()">Fechar</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div ng-show="form_login">
+      <form ng-submit="doLogin()">
+        <div class="list">
+          <p ng-bind-html="retorno_error_login" style="margin-left:20px"></p>
+          <label class="item item-input"> <span class="input-label">Usuário</span>
+            <input type="text" id="usuario" name="usuario">
+          </label>
+          <p ng-bind-html="errorUsuario" style="margin-left:20px"></p>
+          <label class="item item-input"> <span class="input-label">Senha</span>
+            <input type="password" id="senha" name="senha">
+          </label>
+          <p ng-bind-html="errorSenha" style="margin-left:20px"></p>
+          <div class="padding" ng-hide="enviando_login">
+            <button type="submit" class="button button-block button-positive">Entrar</button>
+          </div>
+          <div class="padding" ng-show="enviando_login"> <img src="img/loading.gif"> aguarde, estamos verificando seus dados... </div>
+        </div>
+      </form>
+      <div class="row responsive-sm">
+        <div class="col col-50" style="text-align:center">
+          <button class="button button-clear button-positive button-small" ng-click="senha()"><i class="icon ion-star"></i> Esqueci minha senha</button>
+        </div>
+      </div>
+    </div>
+    <div ng-show="form_esqueci">
+      <form ng-submit="doLogin()">
+        <div class="list">
+          <label class="item item-input"> <span class="input-label">usuário</span>
+            <input type="text" ng-model="loginData.username">
+          </label>
+          <div class="padding" ng-hide="enviando_login">
+            <button class="button button-block button-positive">Entrar</button>
+          </div>
+          <div class="padding" ng-show="enviando_login"> <img src="img/loading.gif"> </div>
+        </div>
+      </form>
+      <div class="row responsive-sm">
+        <div class="col col-50" style="text-align:center">
+          <button class="button button-clear button-positive button-small" ng-click="login()"><i class="icon ion-star"></i> Efetuar login</button>
+        </div>
+      </div>
+    </div>
+    <div ng-show="form_cadastro">
+      <form ng-submit="doLogin()">
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" ng-model="loginData.nome" placeholder="Nome">
+          </label>
+          <label class="item item-input">
+            <input type="email" ng-model="loginData.email" placeholder="E-mail">
+          </label>
+          <label class="item item-input">
+            <input type="text" ng-model="loginData.usuario" placeholder="Usuário">
+          </label>
+          <label class="item item-input">
+            <input type="password" ng-model="loginData.senha" placeholder="Senha">
+          </label>
+          <li class="item item-checkbox">
+            <label class="checkbox">
+              <input type="checkbox">
+            </label>
+            li o termo e aceito me cadastrar </li>
+          <div class="padding">
+            <button class="button button-block button-positive">Cadastrar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</div>
